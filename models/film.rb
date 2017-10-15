@@ -35,8 +35,12 @@ class Film
   #   WHERE id = $3"
   #   values = [@title, @price, @id]
   #   film = SqlRunner.run( sql, values )
-  #   @id = film['id'].to_i
-  #
+  #   @id = film['id'].to_is
   # end
 
+  def self.delete_all()
+    sql = "DELETE FROM films"
+    values = []
+    SqlRunner.run(sql, values)
+  end
 end
