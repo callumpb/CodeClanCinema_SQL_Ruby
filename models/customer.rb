@@ -11,6 +11,14 @@ class Customer
     @funds = options['funds'].to_i
   end
 
+  def self.all
+    sql = "SELECT * FROM customers"
+    values = []
+    customers = SqlRunner.run(sql, values)
+    result = customers.map { |customer| Customer.new( customer ) }
+    return result
+  end
+
   def save
     sql  = "INSERT INTO customers (name, funds)
     VALUES ( $1, $2 )
