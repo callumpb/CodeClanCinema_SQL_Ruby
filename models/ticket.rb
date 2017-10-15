@@ -3,7 +3,13 @@ require_relative("film.rb")
 require_relative("customer.rb")
 
 class Ticket
-  @id = options['id'].to_i
-  @customer_id = options['customer_id'].to_i
-  @film_id = options['film_id'].to_i
+
+  attr_reader :id
+  attr_accessor :customer_id, :film_id
+
+  def initialize(options)
+    @id = options['id'].to_i
+    @customer_id = options['customer_id'].to_i
+    @film_id = options['film_id'].to_i
+  end
 end
