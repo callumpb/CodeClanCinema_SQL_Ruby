@@ -35,7 +35,7 @@ class Film
   #   WHERE id = $3"
   #   values = [@title, @price, @id]
   #   film = SqlRunner.run( sql, values )
-  #   @id = film['id'].to_is
+  #   @id = film['id'].to_i
   # end
 
   def delete
@@ -48,5 +48,17 @@ class Film
     sql = "DELETE FROM films"
     values = []
     SqlRunner.run(sql, values)
+  end
+
+
+  def customers
+    sql = "SELECT customers.* FROM customers
+    INNER JOIN tickets ON customers.id = tickets.customer_id
+    WHERE customer_id = $1
+    "
+    values = [@id]
+    results = SqlRunner.run(sql, values)
+    customers = results.map {|customer| Customer.new(customer)}
+    return customers
   end
 end
