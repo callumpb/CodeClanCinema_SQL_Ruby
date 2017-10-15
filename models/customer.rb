@@ -11,4 +11,4 @@ class Customer
     @funds = options['funds'].to_i
   end
 
-  
+end
