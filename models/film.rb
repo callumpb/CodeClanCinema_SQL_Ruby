@@ -28,6 +28,16 @@ class Film
     @id = film['id'].to_i
   end
 
+
+  def update
+    sql = "UPDATE films
+    SET (title, price)
+    = ($1, $2)
+    WHERE id = $3"
+    values = [@title, @price, @id]
+    SqlRunner.run( sql, values )
+  end
+
   # def update
   #   sql = "UPDATE films
   #   SET (title, price)
@@ -58,7 +68,11 @@ class Film
     "
     values = [@id]
     results = SqlRunner.run(sql, values)
+    #[{"id": 4, "name": "darren", "funds": 44}]
+    #customers[0].delete because it delete
     customers = results.map {|customer| Customer.new(customer)}
+    #[Customer {id: 4, name: darren, funds: 44}]
+    #customers[0].delete
     return customers
   end
 end
